@@ -7,6 +7,6 @@ if [ -f "$CHECK" ]; then
     echo "$CHECK exists."
 else
     echo "$CHECK does not exist."
-    cd /home/tbanzato/twitter-bots/tchau_maldito
+    cd /home/tbanzato/tchau_maldito
     screen -dm -S maldito python3 tchau_maldito.py
 fi
