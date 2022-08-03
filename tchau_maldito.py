@@ -109,7 +109,7 @@ try:
                     df_final = pd.concat(frames)
                     df_final.to_csv(file_name, encoding='utf-8-sig',index=False)
 
-
+                    logger.info(f'Uploading updates to Gdrive')
                     file = drive.CreateFile({'title': 'replied_maldito.csv','id': '1yKqHm2B3IVayojiMHEZH435A0KMDrcol'})
                     file.SetContentFile('replied/replied_maldito.csv')
                     file.Upload()
