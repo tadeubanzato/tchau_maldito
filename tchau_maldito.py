@@ -12,6 +12,7 @@ import pandas as pd
 import sys
 import os.path
 from csv import writer
+import pandas as pd
 
 'IMPORT CREDENTIALS'
 from credentials.credentials import *
@@ -56,7 +57,12 @@ try:
 
         names = []
         count = 0
+
+        df_replies = pd.DataFrame(columns=['tweetID','screename','intweet'])
         for tweet in tweepy.Cursor(api.mentions_timeline, since_id=since_id).items():
+            file_name = 'replied/replied_maldito.csv'
+
+            saved_list = pd.read_csv(file_name, on_bad_lines='skip')['tweetID'].drop_duplicates().tolist() #Open file
 
             # print(f'\nTWEET ID TADEU: {tweet.id}')
             # print(f'REPLY ID ORIGINAL: {tweet.in_reply_to_status_id}')
@@ -65,23 +71,22 @@ try:
             # print(f'Screen name: {tweet.user.screen_name}')
             # print(f'In Reply name: {tweet.in_reply_to_screen_name}')
 
-
+            # df_replies = pd.read_csv('replied/replied_maldito.csv')
             names = [f'@{tweet.user.screen_name}',f'@{tweet.in_reply_to_screen_name}']
-
-            file_name = 'replied/replied_maldito.csv'
             list = [tweet.id,tweet.user.screen_name,tweet.in_reply_to_screen_name]
-            df_list = pd.read_csv(file_name)['tweetID'].tolist()
+            # df_list = pd.read_csv(file_name)['tweetID'].tolist()
+            # saved_df = pd.read_csv(file_name, on_bad_lines='skip')['tweetID'].drop_duplicates().tolist() #Open file
 
-            if 'choraosonaro' in tweet.user.screen_name or tweet.id in df_list:
+            if 'choraosonaro' in tweet.user.screen_name or tweet.id in saved_list:
+                logger.info(f'Already replied')
                 continue
             elif '@choraosonaro' in tweet.text and any(keyword.lower() in tweet.text.lower() for keyword in keywords):
                 # print('Reply')
-                logger.info(f"Rplying to @{tweet.user.screen_name}")
-
+                logger.info(f'Rplying to @{tweet.user.screen_name}')
                 try:
                     if 'gado' in tweet.text.lower():
                         filename = get_gif('gifs/gado/')
-                        frases = ['só podia ser esse GADO!', 'não tem como não se Gado né!?', 'gado é poco né!', 'gado maldito']
+                        frases = ['só podia ser GADO 🐮!', 'não tem como não ser GADO 🐮 né!?', 'GADO 🐮 é pouco né!', 'GADO 🐮 maldito', 'insuportavelmente gado 🐮', 'em GADO 🐮 we trust', 'nunca enganou 🐮', 'esse aí apertou 17 certeza 🐮', 'esse ai vai apertar 22 certeza 🐮']
                     else:
                         filename = get_gif('gifs/malditos/')
                         frases = ['Tchau Bolsonaro seu Maldito!', 'Esse Bolsonaro tem que ir logo. Tchau Maldito!', 'Os bolsonaristas estão ficando desesperado. Tchau Maldito!', 'Esse Bolsonaro é realmente um MALDITO!', 'Tchau Bozo, seu Maldito']
@@ -95,11 +100,19 @@ try:
                     status = f'{random.choice(intro)}, {" ".join(names)} {random.choice(frases)}\n{" ".join(random.sample(hashtags, 2))}'
                     api.update_status(status=status, in_reply_to_status_id = tweet.id, media_ids=[media.media_id], auto_populate_reply_metadata=True)
 
-                    with open(file_name, 'a', newline='') as f_object:
-                        # Pass the CSV  file object to the writer() function
-                        writer_object = writer(f_object)
-                        writer_object.writerow(list)
-                        f_object.close()
+                    df_replies.loc[len(df_replies.index)] = {'tweetID':tweet.id, 'screename':tweet.user.screen_name, 'intweet':tweet.in_reply_to_screen_name}
+
+                    saved_df = pd.read_csv(file_name, on_bad_lines='skip').drop_duplicates() #Open file
+                    frames = [df_replies, saved_df]
+                    df_final = pd.concat(frames)
+                    df_final.to_csv(file_name, encoding='utf-8-sig',index=False)
+
+
+                    # with open(file_name, 'a', newline='') as f_object:
+                    #     # Pass the CSV  file object to the writer() function
+                    #     writer_object = writer(f_object)
+                    #     writer_object.writerow(list)
+                    #     f_object.close()
 
                     # {tweet.user.screen_name}
                     # filename = f'gifs/{get_gif()}'

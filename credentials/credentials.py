@@ -1,10 +1,10 @@
-api_key = "UNuZrZxQcLVLbvEGM4ti1h753"  # CONSUMER_KEY
-api_secret_key = "u2QNmCFPRz0Uo6CjwBY3LtOQLt4pFafxd3uoHXNidWL8kUxUD7"  # CONSUMER_SECRET
-access_token = "1522621613413306368-g7gfCLSA22EXz5NHHwu5uwg6BsTzFJ"  # ACCESS_TOKEN
-access_token_secret = "2oYRHI15eaS7iQGcKcUYkZO10fEtBetOfCAtLe8nngeya"  # ACCESS_TOKEN_SECRET
-bearer_token = "AAAAAAAAAAAAAAAAAAAAAGbMfQEAAAAAdY6IcJicWia7mfcmAGXMttqMFyw%3DACR2pj3HYSfLKEtnoBNq2Xg8N2rmMUQfdnsoWUvTcFlbERW8Mg"
-client_id = "elJBMTVBa1BCcURobWZTcDZnTHY6MTpjaQ"
-client_secret = "6ooOxpu41Q-4h2YNicbBvGVJymJ8JRp4tYQ4GB8BZXdteipyB8"
+api_key = "FupfDe0qfk1XrIPDvECTrbswU"  # CONSUMER_KEY
+api_secret_key = "oFEeq3izeLsDN0zHgEL94i45fJ6Hp6Oq1tmAcuNW8m2VIn1k6C"  # CONSUMER_SECRET
+access_token = "1522621613413306368-sGXO33TtFHyzT4wVQyCvKeNeWhDHx6"  # ACCESS_TOKEN
+access_token_secret = "oJjcQjwzmOcGsstPGsg5TMa9Authc8Ez6jEDbKVDgMXl5"  # ACCESS_TOKEN_SECRET
+bearer_token = "AAAAAAAAAAAAAAAAAAAAAKk%2FfgEAAAAA%2BJPOV7swg5x%2BDqAkAC5Dc%2F3ZAVY%3DJEbAcYVLAVfXqGvoHxHEIerQGMMcAW9wzWPEJ7wf4h4NXwhyHy"
+
+
 
 
 '''
@@ -20,3 +20,6 @@ permissions (Read, Read and write, or Read and write and Direct message)
 #
 # cred = namedtuple("Credential", data.keys())(*data.values())
 #
+
+# client_id = "elJBMTVBa1BCcURobWZTcDZnTHY6MTpjaQ"
+# client_secret = "6ooOxpu41Q-4h2YNicbBvGVJymJ8JRp4tYQ4GB8BZXdteipyB8"
