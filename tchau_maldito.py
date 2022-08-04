@@ -134,7 +134,7 @@ try:
         since_id = 1
         while True:
             try:
-                keywords = ['Maldito', '#tchaumaldito', 'lula', 'gado', 'boi']
+                keywords = ['Maldito', '#tchaumaldito', 'lula', 'gado', 'boi', 'salve']
                 since_id = check_mentions(api, keywords, since_id)
                 logger.info('Waiting')
                 time.sleep(60*2)
