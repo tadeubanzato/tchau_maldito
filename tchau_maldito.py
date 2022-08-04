@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # tchau_madito.py
 
+from dotenv import load_dotenv
+
 'LOAD COMMON LIBRARIES'
 import tweepy
 import logging
@@ -14,13 +16,16 @@ import os.path
 from csv import writer
 import pandas as pd
 
-'IMPORT CREDENTIALS'
-from credentials.credentials import *
-from modules.gdrive import *
+# 'IMPORT CREDENTIALS'
+# from credentials.credentials import *
+# from modules.gdrive import *
 
 'LOAD LOGGIN'
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+
+def configure():
+    load_dotenv()
 
 # Create PID number for verification
 pid = str(os.getpid())
@@ -40,8 +45,10 @@ try:
     def create_api():
         # Authenticate to Twitter
         logger.info("Authenticating API")
-        auth = tweepy.OAuthHandler(api_key, api_secret_key)
-        auth.set_access_token(access_token, access_token_secret)
+        auth = tweepy.OAuthHandler(os.getenv('api_key'), os.getenv('api_secret_key'))
+        auth.set_access_token(os.getenv('access_token'), os.getenv('access_token_secret'))
+        # auth = tweepy.OAuthHandler(api_key, api_secret_key)
+        # auth.set_access_token(access_token, access_token_secret)
         api = tweepy.API(auth)
         try:
             api.verify_credentials()
@@ -123,6 +130,7 @@ try:
         return new_since_id
 
     def main():
+        configure()
         api = create_api()
         since_id = 1
         while True:
