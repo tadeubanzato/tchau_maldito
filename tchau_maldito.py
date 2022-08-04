@@ -17,8 +17,7 @@ from csv import writer
 import pandas as pd
 
 # 'IMPORT CREDENTIALS'
-# from credentials.credentials import *
-# from modules.gdrive import *
+from modules.gdrive import *
 
 'LOAD LOGGIN'
 logging.basicConfig(level=logging.INFO)

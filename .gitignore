@@ -5,3 +5,4 @@ credentials/__pycache__/
 .env
 replied_maldito.csv
 mycreds.txt
+credentials/mycreds.txt
