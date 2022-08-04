@@ -1,7 +1,14 @@
+### Ignore file type ###
+*.json
+*.csv
+*.txt
 .DS_Store
-__pycache__/
-__OLD/
 .env
-replied_maldito.csv
-mycreds.txt
-client_secrets.json
+
+### Ignore folders ###
+__pycache__/
+
+### Ignore Exceptions ###
+!client_secrets.json
+!replied_maldito.csv
+!.envExample

@@ -1,0 +1,5 @@
+api_key=YOUR API KEY
+api_secret_key=YOUR API KEY SECRET
+access_token=YOUR API ACCESS TOKEN
+access_token_secret=YOUR API TOKEN SECRET
+bearer_token=YOUR API BEARER
