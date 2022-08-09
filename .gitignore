@@ -7,6 +7,7 @@
 
 ### Ignore folders ###
 __pycache__/
+replied/
 
 ### Ignore Exceptions ###
 !client_secrets.json
