@@ -15,6 +15,7 @@ import sys
 import os.path
 from csv import writer
 import pandas as pd
+import datetime
 
 # 'IMPORT CREDENTIALS'
 from modules.gdrive import *
@@ -90,22 +91,31 @@ try:
             elif '@choraosonaro' in tweet.text and any(keyword.lower() in tweet.text.lower() for keyword in keywords):
                 # print('Reply')
                 logger.info(f'Rplying to @{tweet.user.screen_name}')
+                emojis = ['✌️', '👋', '👍','✊','🤜','💀','😏','😷','😎','🤬','🥹','🙂','🤟']
+                intro = ['E aí', 'Salve', 'Tranquilinho', 'Suave', 'De boas', 'TMJ', 'É nóis', 'Coé', 'Ae', 'Qualé', 'Firma', 'Firmeza', 'Sussa', 'Valeu', 'Manda', 'Tranquilo']
+                today = datetime.date.today()
+                future = datetime.date(2022,10,2)
+                diff = future - today
+
                 try:
                     if 'gado' in tweet.text.lower():
                         filename = get_gif('gifs/gado/')
-                        frases = ['só podia ser GADO 🐮!', 'não tem como não ser GADO 🐮 né!?', 'GADO 🐮 é pouco né!', 'GADO 🐮 maldito', 'insuportavelmente gado 🐮', 'em GADO 🐮 we trust', 'nunca enganou 🐮', 'esse aí apertou 17 certeza 🐮', 'esse ai vai apertar 22 certeza 🐮']
+                        frases = [f'só podia ser GADO 🐮! Contagem regressiva {diff.days} dias', f'não tem como não ser GADO 🐮 né!? {diff.days} dias', 'GADO 🐮 é pouco né!', 'GADO 🐮 maldito', f'insuportavelmente gado 🐮 que em {diff.days} dias vai chorar', f'em GADO 🐮 we trust e em {diff.days} dias tomara que acabe', 'nunca enganou 🐮', 'esse aí apertou 17 certeza 🐮', 'esse ai vai apertar 22 em {diff.days} dias com certeza 🐮']
                     else:
                         filename = get_gif('gifs/malditos/')
-                        frases = ['tchau Bolsonaro seu Maldito!', 'esse Bolsonaro tem que ir logo. Tchau Maldito!', 'os bolsonaristas estão ficando desesperado. Tchau Maldito!', 'esse Bolsonaro é realmente um MALDITO!', 'tchau Bozo, seu Maldito']
+                        # frases = ['tchau Bolsonaro seu Maldito!', 'esse Bolsonaro tem que ir logo. Tchau Maldito!', 'os bolsonaristas estão ficando desesperado. Tchau Maldito!', 'esse Bolsonaro é realmente um MALDITO!', 'tchau Bozo, seu Maldito']
+                        # frases = ['tchau Bolsonaro seu Maldito!', 'esse Bolsonaro tem que ir logo. Tchau Maldito!', 'os bolsonaristas estão ficando desesperado. Tchau Maldito!', 'esse Bolsonaro é realmente um MALDITO!', 'tchau Bozo, seu Maldito']
+                        ponome = ['essa é uma corja', 'só tem', 'é muito', 'bolsonarista é tudo', 'é tudo um bando de', 'só é um baita', 'isso é um baita', 'muita gente', 'tudo', 'um bando de']
+                        adjetivo = ['idiota', 'imbecíl', 'animal', 'trouxa', 'energumeno', 'estúpido', 'fanático', 'extremista', 'facista', 'mal caráter', 'engodo', 'neo liberalista retrogrado']
+                        despedida = [f'Tchau MADITO falta só {diff.days} dias', 'VTNC seu Maldito', f'Falta só {diff.days} dias pra darmos Adeus a esse Maldito', f'É o fim da linha para esses maltidos, faltam {diff.days} dias', f'Está acabando malditos em {diff.days} nos falamos', f'Hora contada para acabar com esses malditos, mais específico {diff.days} dias', f'Faltam {diff.days} dias pra acabar com esses malditos', 'Esses malditos serão presos', f'É o ultimo respido desses malditos em {diff.days} falamos novamente', f'Esses malditos estão com os dias contados, {diff.days} dias precisamente', f'Espero que em {diff.days} diremos Tchau Maldito para essa corja', f'Estamos torcendo pra que em {diff.days} tudo acabe']
 
                     media = api.media_upload(filename)
 
                     # api.update_status('@' + mention.user.screen_name + " Here's your Quote", mention.id, media_ids=[media.media_id])
                     # api.update_status(status=f'Ae, {" ".join(names)} Tchau Maldito!', in_reply_to_status_id = tweet.id, media_ids=[media.media_id], auto_populate_reply_metadata=True)
-                    emojis = ['✌️', '👋', '👍','✊','🤜','💀','😏','😷','😎','🤬','🥹','🙂','🤟']
-                    intro = ['Ae', 'Salve', 'Valeu', 'TMJ', 'Firmeza', 'Qualé', 'E aí']
+
                     hashtags = ['#ForaBolsonaro', '#BolsonaroGenocida', '#BolsonaroVagabundo', '#BolsonaroLadrao', '#BolsonaroCorrupto', '#BolsonaroFacista', '#BolsonaroMentiroso']
-                    status = f'{random.choice(intro)} {random.choice(emojis)}, {" e ".join(names)} {random.choice(frases)} {" ".join(random.sample(hashtags, 2))}'
+                    status = f'{random.choice(intro)} {random.choice(emojis)}, {" e ".join(names)} {random.choice(ponome)} {random.choice(adjetivo)}. {random.choice(adjetivo)} {random.choice(emojis)} {" ".join(random.sample(hashtags, 2))}'
                     api.update_status(status=status, in_reply_to_status_id = tweet.id, media_ids=[media.media_id], auto_populate_reply_metadata=True)
 
                     df_replies.loc[len(df_replies.index)] = {'tweetID':tweet.id, 'screename':tweet.user.screen_name, 'intweet':tweet.in_reply_to_screen_name}
