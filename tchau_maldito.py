@@ -111,7 +111,7 @@ try:
                     intro = ['E aí', 'Salve', 'Tranquilinho', 'Suave', 'De boas', 'TMJ', 'É nóis', 'Coé', 'Ae', 'Qualé', 'Firma', 'Firmeza', 'Sussa', 'Valeu', 'Manda', 'Tranquilo']
                     hashtags = ['#ForaBolsonaro', '#BolsonaroGenocida', '#BolsonaroVagabundo', '#BolsonaroLadrao', '#BolsonaroCorrupto', '#BolsonaroFacista', '#BolsonaroMentiroso']
                     # status = f'{random.choice(intro)} {random.choice(emojis)}, {random.choice(ponome)} {random.choice(adjetivo)}. {random.choice(adjetivo)} {random.choice(emojis)} {" ".join(random.sample(hashtags, 2))}'
-                    status = f'{random.choice(intro)} {random.choice(emojis)}, {" e ".join(names)} {random.choice(ponome)} {random.choice(adjetivo)}. {random.choice(adjetivo)} {random.choice(emojis)} {random.choice(despedida)} {" ".join(random.sample(hashtags, 2))}'
+                    status = f'{random.choice(intro)} {random.choice(emojis)}, {" e ".join(names)} {random.choice(ponome)} {random.choice(adjetivo)}. {random.choice(despedida)} {random.choice(emojis)} {" ".join(random.sample(hashtags, 2))}'
 
                     api.update_status(status=status, in_reply_to_status_id = tweet.id, media_ids=[media.media_id], auto_populate_reply_metadata=True)
 
