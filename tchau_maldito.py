@@ -88,8 +88,7 @@ try:
             elif '@choraosonaro' in tweet.text and any(keyword.lower() in tweet.text.lower() for keyword in keywords):
                 # print('Reply')
                 logger.info(f'Rplying to @{tweet.user.screen_name}')
-                emojis = ['✌️', '👋', '👍','✊','🤜','💀','😏','😷','😎','🤬','🥹','🙂','🤟']
-                intro = ['E aí', 'Salve', 'Tranquilinho', 'Suave', 'De boas', 'TMJ', 'É nóis', 'Coé', 'Ae', 'Qualé', 'Firma', 'Firmeza', 'Sussa', 'Valeu', 'Manda', 'Tranquilo']
+
                 today = datetime.date.today()
                 future = datetime.date(2022,10,2)
                 diff = future - today
@@ -108,11 +107,12 @@ try:
 
                     media = api.media_upload(filename)
 
-                    # api.update_status('@' + mention.user.screen_name + " Here's your Quote", mention.id, media_ids=[media.media_id])
-                    # api.update_status(status=f'Ae, {" ".join(names)} Tchau Maldito!', in_reply_to_status_id = tweet.id, media_ids=[media.media_id], auto_populate_reply_metadata=True)
-
+                    emojis = ['✌️', '👋', '👍','✊','🤜','💀','😏','😷','😎','🤬','🥹','🙂','🤟']
+                    intro = ['E aí', 'Salve', 'Tranquilinho', 'Suave', 'De boas', 'TMJ', 'É nóis', 'Coé', 'Ae', 'Qualé', 'Firma', 'Firmeza', 'Sussa', 'Valeu', 'Manda', 'Tranquilo']
                     hashtags = ['#ForaBolsonaro', '#BolsonaroGenocida', '#BolsonaroVagabundo', '#BolsonaroLadrao', '#BolsonaroCorrupto', '#BolsonaroFacista', '#BolsonaroMentiroso']
-                    status = f'{random.choice(intro)} {random.choice(emojis)}, {" e ".join(names)} {random.choice(ponome)} {random.choice(adjetivo)}. {random.choice(adjetivo)} {random.choice(emojis)} {" ".join(random.sample(hashtags, 2))}'
+                    # status = f'{random.choice(intro)} {random.choice(emojis)}, {random.choice(ponome)} {random.choice(adjetivo)}. {random.choice(adjetivo)} {random.choice(emojis)} {" ".join(random.sample(hashtags, 2))}'
+                    status = f'{random.choice(intro)} {random.choice(emojis)}, {" e ".join(names)} {random.choice(ponome)} {random.choice(adjetivo)}. {random.choice(adjetivo)} {random.choice(emojis)} {random.choice(despedida)} {" ".join(random.sample(hashtags, 2))}'
+
                     api.update_status(status=status, in_reply_to_status_id = tweet.id, media_ids=[media.media_id], auto_populate_reply_metadata=True)
 
                     df_replies.loc[len(df_replies.index)] = {'tweetID':tweet.id, 'screename':tweet.user.screen_name, 'intweet':tweet.in_reply_to_screen_name}
