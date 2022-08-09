@@ -17,9 +17,6 @@ from csv import writer
 import pandas as pd
 import datetime
 
-# 'IMPORT CREDENTIALS'
-from modules.gdrive import *
-
 'LOAD LOGGIN'
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -153,11 +150,6 @@ try:
                 time.sleep(60)
 
     if __name__ == '__main__':
-        file_name = 'replied/replied_maldito.csv'
-        if os.path.exists(file_name):
-            os.remove(file_name)
-        file = drive.CreateFile({'id': '1yKqHm2B3IVayojiMHEZH435A0KMDrcol'})
-        file.GetContentFile(file_name) # Download file as 'catlove.png'
         main()
 
 finally:
