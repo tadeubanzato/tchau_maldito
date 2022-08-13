@@ -4,6 +4,7 @@
 *.txt
 .DS_Store
 .env
+replied_maldito.csv
 
 ### Ignore folders ###
 __pycache__/
@@ -11,6 +12,3 @@ replied/
 __OLD/
 
 ### Ignore Exceptions ###
-!client_secrets.json
-!replied_maldito.csv
-!.envExample
