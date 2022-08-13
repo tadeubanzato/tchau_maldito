@@ -72,7 +72,6 @@ try:
         for tweet in mentions:
             ## Check if already replied
             if any(keyword in tweet.text.lower() for keyword in keywords) and tweet.id not in replied_list and tweet.in_reply_to_status_id not in replied_list:
-                replied_to = tweet.id if tweet.in_reply_to_status_id is None else tweet.in_reply_to_status_id
                 # print(tweet.truncated)
                 # print(f'\n{"-"*20} POST INFO {"-"*20}\n')
                 # print(f'Truncated: {tweet.truncated}')
@@ -85,6 +84,8 @@ try:
                 # >>>> TEST EACH MENTION <<<<<<
                 # tweets = api.mentions_timeline(count = 1)
                 # replied_to = x[0].id if x[0].in_reply_to_status_id is None else 'x[0].in_reply_to_status_id'
+
+                replied_to = tweet.id if tweet.in_reply_to_status_id is None else tweet.in_reply_to_status_id
 
                 if not tweet.user.following:
                     tweet.user.follow()
@@ -116,8 +117,11 @@ try:
     if __name__ == "__main__":
         load_dotenv() #load configs from .env
         api = get_API()
+
+        ## Pull all mentions
         mentions = tweepy.Cursor(api.mentions_timeline).items()
-        check_mentions(api, ["maldito", "idiota"], mentions)
+        keywords = ['maldito', 'idiota', 'vagabundo', 'pilantra', 'gado', 'boi', 'gadometro']
+        check_mentions(api, keywords, mentions)
 
 finally:
     # Finaliza o arquivo PID
